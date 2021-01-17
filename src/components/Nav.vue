@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav">
     <router-link to="/labels">标签</router-link>
     |
     <router-link to="/bill">记账</router-link>
@@ -15,5 +15,8 @@ name: "Nav"
 </script>
 
 <style lang="scss" scoped>
-
+  .nav{
+    display: flex;
+    justify-content: space-around;
+  }
 </style>
