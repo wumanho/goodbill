@@ -1,41 +1,40 @@
 <template>
-  <div class="nav">
-    <router-link to="/labels">
-      <svg>
-        <use xlink:href="#label"/>
-      </svg>
+  <nav>
+    <router-link to="/labels" class="item">
+      <Icon name="#label"/>
       标签
     </router-link>
-    <router-link to="/bill">
-      <svg>
-        <use xlink:href="#bill"/>
-      </svg>
+    <router-link to="/bill" class="item">
+      <Icon name="#bill"/>
       记账
     </router-link>
-    <router-link to="/statistics">
-      <svg>
-        <use xlink:href="#statistics"/>
-      </svg>
+    <router-link to="/statistics" class="item">
+      <Icon name="#statistics"/>
       统计
     </router-link>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">
-    const importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
-    try {
-      importAll(require.context('../assets/icons', true, /\.svg$/));
-    } catch (e) {
-      console.log(e);
-    }
+    import Icon from '@/components/Icon.vue';
     export default {
-      name: 'Nav'
+      name: 'Nav',
+      components: {Icon}
     };
 </script>
 
 <style lang="scss" scoped>
-.nav {
-  display: flex;
-  //justify-content: space-around;
-}
+  nav{
+    display: flex;
+    box-shadow: 0 0 3px rgba(0,0,0,0.25);
+    > .item{
+      font-size: 12px;
+      padding:2px 0;
+      display: flex;
+      width: 33.3333%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 </style>
