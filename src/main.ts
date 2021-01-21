@@ -8,7 +8,6 @@ import BaseLayout from '@/components/BaseLayout.vue';
 
 Vue.config.productionTip = false;
 
-Vue.component('Nav', Nav);
 Vue.component('BaseLayout', BaseLayout);
 
 new Vue({

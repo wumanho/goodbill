@@ -8,8 +8,10 @@
 </template>
 
 <script lang="ts">
+import Nav from '@/components/Nav.vue';
 export default {
   name: 'BaseLayout',
+  components: {Nav},
   props:["classPrefix"]
 };
 </script>

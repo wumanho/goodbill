@@ -1,53 +1,20 @@
 <template>
   <BaseLayout class-prefix="layout">
-    <div class="tags">
-      <ul class="current">
-        <li>衣</li>
-        <li>食</li>
-        <li>住</li>
-        <li>行</li>
-      </ul>
-      <div class="new">
-        <button>新增标签</button>
-      </div>
-    </div>
-    <div>
-      <label class="notes">
-        <span class="name">备注</span>
-        <input type="text" placeholder="请在这里添加备注"/>
-      </label>
-    </div>
-    <div>
-      <ul class="types">
-        <li class="selected">支出</li>
-        <li>收入</li>
-      </ul>
-    </div>
-    <div class="numberPad">
-      <div class="output">100</div>
-      <div class="buttons">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>删除</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>清空</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button class="ok">OK</button>
-        <button class="zero">0</button>
-        <button>.</button>
-      </div>
-    </div>
+    <Tags/>
+    <Notes/>
+    <Types/>
+    <NumberPad/>
   </BaseLayout>
 </template>
 
 <script lang="ts">
+import Tags from '@/components/Bill/Tags.vue';
+import Notes from '@/components/Bill/Notes.vue';
+import Types from '@/components/Bill/Types.vue';
+import NumberPad from '@/components/Bill/NumberPad.vue';
 export default {
-  name: 'Bill'
+  name: 'Bill',
+  components: {NumberPad, Types, Notes, Tags}
 };
 </script>
 
@@ -60,143 +27,5 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import "~@/assets/style/helper.scss";
 
-.numberPad {
-  > .output {
-    @extend %outerShadow;
-    font-size: 36px;
-    font-family: Consolas, monospace;
-    padding: 9px 16px;
-    text-align: right;
-  }
-
-  > .buttons {
-    @extend %clearFix;
-
-    > button {
-      width: 25%;
-      height: 64px;
-      background: transparent;
-      border: none;
-
-      &.ok {
-        height: 64*2px;
-        float: right;
-      }
-
-      &.zero {
-        width: 50%;
-      }
-
-      $bg: #f2f2f2;
-
-      &:nth-child(1) {
-        background: $bg;
-      }
-
-      &:nth-child(2), &:nth-child(5) {
-        background: darken($bg, 4%);
-      }
-
-      &:nth-child(3), &:nth-child(6), &:nth-child(9) {
-        background: darken($bg, 8%);
-      }
-
-      &:nth-child(4), &:nth-child(7), &:nth-child(10) {
-        background: darken($bg, 12%);
-      }
-
-      &:nth-child(8), &:nth-child(11), &:nth-child(13) {
-        background: darken($bg, 16%);
-      }
-
-      &:nth-child(14) {
-        background: darken($bg, 20%);
-      }
-
-      &:nth-child(12) {
-        background: darken($bg, 24%);
-      }
-
-    }
-  }
-}
-
-.types {
-  display: flex;
-  background: #c4c4c4;
-  font-size: 24px;
-
-  > li {
-    width: 50%;
-    text-align: center;
-    line-height: 64px;
-    height: 64px;
-    position: relative;
-
-    &.selected::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: #333;
-    }
-  }
-}
-
-.notes {
-  display: flex;
-  background: #f5f5f5;
-  align-items: center;
-  font-size: 14px;
-
-  > .name {
-    padding: 0 16px;
-  }
-
-  > input {
-    background: transparent;
-    border: none;
-    padding: 16px 0;
-    flex-grow: 1;
-  }
-}
-
-.tags {
-  padding: 16px;
-  font-size: 14px;
-  overflow: auto;
-
-  > .current {
-    display: flex;
-    flex-wrap: wrap;
-    > li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #d9d9d9;
-      padding: 0 15px;
-      margin-top: 8px;
-      $h: 24px;
-      height: $h;
-      border-radius: $h/2;
-      margin-right: 12px;
-    }
-  }
-
-  > .new {
-    padding-top: 16px;
-
-    > button {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid;
-      color: #999;
-      padding: 0 4px;
-    }
-  }
-}
 </style>
