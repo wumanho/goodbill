@@ -15,17 +15,6 @@ export default class Types extends Vue {
   switchType(type: string) {
     this.type = type;
   }
-  // name: "Types",
-  // data() {
-  //   return {
-  //     type: '-' // "-" 表示支出 "+"表示收入
-  //   }
-  // },
-  // methods: {
-  //   switchType(type) {
-  //     this.type = type
-  //   }
-  // }
 }
 </script>
 
