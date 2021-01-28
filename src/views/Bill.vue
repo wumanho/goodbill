@@ -1,21 +1,41 @@
 <template>
   <BaseLayout class-prefix="layout">
-    <Tags/>
-    <Notes/>
-    <Types/>
-    <NumberPad/>
+    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Notes :value.sync="record.notes"/>
+    <Types :type.sync="record.type"/>
+    <NumberPad :value.sync="record.amount"/>
+    {{record}}
   </BaseLayout>
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 import Tags from '@/components/Bill/Tags.vue';
 import Notes from '@/components/Bill/Notes.vue';
 import Types from '@/components/Bill/Types.vue';
 import NumberPad from '@/components/Bill/NumberPad.vue';
-export default {
-  name: 'Bill',
-  components: {NumberPad, Types, Notes, Tags}
-};
+
+type Record = {
+  tags: string[];
+  type: string;
+  notes: string;
+  amount: number;
+}
+
+@Component({
+  components: {Tags, Notes, Types, NumberPad}
+})
+export default class Bill extends Vue {
+  tags = ['衣', '食', '住', '行'];
+
+  record: Record = {tags: [], notes: '', type: '-', amount: 0};
+
+  onUpdateTags(value: string[]) {
+    this.record.tags = value;
+  }
+
+}
 </script>
 
 <style lang="scss">

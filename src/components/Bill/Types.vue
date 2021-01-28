@@ -7,14 +7,25 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  type = '-'; // "-" 表示支出 "+"表示收入
+  // type = '-'; // "-" 表示支出 "+"表示收入
+  @Prop(String) readonly type!: string;
+
   switchType(type: string) {
-    this.type = type;
+    if (type !== "+" && type !== "-"){
+      throw new Error("type is wrong")
+    }
+    //this.type = type;
+    this.$emit("update:type",type)
   }
+
+  // @Watch('type')
+  // onTypeChanged(val: string) {
+  //   this.$emit("update:value",val)
+  // }
 }
 </script>
 
