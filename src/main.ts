@@ -5,10 +5,12 @@ import router from './router';
 import store from './store';
 import Nav from '@/components/Nav.vue';
 import BaseLayout from '@/components/BaseLayout.vue';
+import Icon from '@/components/Icon.vue';
 
 Vue.config.productionTip = false;
 
 Vue.component('BaseLayout', BaseLayout);
+Vue.component("Icon",Icon)
 
 new Vue({
     router: router,

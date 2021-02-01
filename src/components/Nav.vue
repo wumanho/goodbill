@@ -36,6 +36,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      .icon {
+        width: 32px;
+        height: 32px;
+      }
     }
    > .selected{
      color: $color-hl;

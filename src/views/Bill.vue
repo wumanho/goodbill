@@ -4,7 +4,6 @@
     <Notes :value.sync="record.notes"/>
     <Types :type.sync="record.type"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
-    {{record}}
   </BaseLayout>
 </template>
 
@@ -15,34 +14,30 @@ import Tags from '@/components/Bill/Tags.vue';
 import Notes from '@/components/Bill/Notes.vue';
 import Types from '@/components/Bill/Types.vue';
 import NumberPad from '@/components/Bill/NumberPad.vue';
+import model from '@/model';
 
-type Record = {
-  tags: string[];
-  type: string;
-  notes: string;
-  amount: number;
-}
 
 @Component({
   components: {Tags, Notes, Types, NumberPad}
 })
 export default class Bill extends Vue {
   tags = ['衣', '食', '住', '行'];
-  records: Record[] = [];
-  record: Record = {tags: [], notes: '', type: '-', amount: 0};
+  records: RecordItem[] = model.get();
+  record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }
   saveRecord(){
-    const newRecord = JSON.parse(JSON.stringify(this.record))
+    const newRecord: RecordItem = model.clone(this.record)
+    newRecord.createTime = new Date();
     this.records.push(newRecord)
   }
 
   @Watch("records")
   onRecordsChanged(){
-    localStorage.setItem("records",JSON.stringify(this.records))
-    console.log(this.records);
+    model.save(this.records)
+    location.reload();
   }
 
 }
