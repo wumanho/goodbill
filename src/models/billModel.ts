@@ -1,5 +1,5 @@
 const LOCAL_STORAGE_KEY_NAME = 'records';
-const model = {
+const billModel = {
     clone(item: RecordItem) {
         return JSON.parse(JSON.stringify(item))
     },
@@ -11,4 +11,4 @@ const model = {
     }
 };
 
-export default model;
+export default billModel;
