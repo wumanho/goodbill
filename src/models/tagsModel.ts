@@ -1,7 +1,11 @@
 const LOCAL_STORAGE_KEY_NAME = 'tags';
+type Tag = {
+    id: string;
+    name: string;
+}
 type TagsModel = {
-    data: string[];
-    get: () => string[];
+    data: Tag[];
+    get: () => Tag[];
     create: (name: string) => string;
     save: () => void;
 }
@@ -13,10 +17,11 @@ const tagsModel: TagsModel = {
         return this.data;
     },
     create(name) {
-        if (this.data.indexOf(name)>=0){
-            throw new Error("标签已存在")
+        const names = this.data.map(item => item.name);
+        if (names.indexOf(name) >= 0) {
+            throw new Error('标签已存在');
         }
-        this.data.push(name);
+        this.data.push({id: name, name: name});
         this.save();
         return name;
     },

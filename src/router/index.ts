@@ -4,28 +4,34 @@ import Bill from '@/views/Bill.vue';
 import Labels from '@/views/Labels.vue';
 import Statistics from '@/views/Statistics.vue';
 import NotFound from '@/views/NotFound.vue';
+import EditLabel from '@/views/EditLabel.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
     {
-        path:"/",
-        redirect:"/bill"
+        path: '/',
+        redirect: '/bill'
     },
     {
-        path:"/bill",
-        component:Bill
+        path: '/bill',
+        component: Bill
     },
     {
-        path:"/labels",
-        component:Labels
+        path: '/labels',
+        component: Labels
     },
     {
-        path:"/statistics",
-        component:Statistics
-    },{
-        path:"*",
-        component:NotFound
+        path: '/statistics',
+        component: Statistics
+    },
+    {
+        path: '/labels/edit',
+        component: EditLabel
+    },
+    {
+        path: '*',
+        component: NotFound
     }
 ];
 
