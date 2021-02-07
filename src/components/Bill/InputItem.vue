@@ -1,7 +1,7 @@
 <template>
   <label class="notes">
     <span class="name">{{ fieldName }}</span>
-    <input type="text" v-model="content" :placeholder="this.placeholder"/>
+    <input type="text" :value="value" @input="onValueChange($event.target.value)" :placeholder="this.placeholder"/>
   </label>
 </template>
 
@@ -13,10 +13,10 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 export default class InputItem extends Vue {
   @Prop({required:true,type:String}) readonly fieldName!: string;
   @Prop(String) readonly placeholder?: string;
-  @Prop() readonly value!: string;
-  content = this.value;
+  @Prop({default:"",type:String}) readonly value!: string;
+  //content = this.value;
 
-  @Watch('content')
+  @Watch('value')
   onValueChange(newValue: string) {
       this.$emit("update:value",newValue)
   }
