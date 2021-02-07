@@ -1,7 +1,7 @@
 <template>
   <BaseLayout class-prefix="layout">
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
-    <Notes field-name="备注" placeholder="在这里输入备注" :value.sync="record.notes"/>
+    <InputItem field-name="备注" placeholder="在这里输入备注" :value.sync="record.notes"/>
     <Types :type.sync="record.type"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
   </BaseLayout>
@@ -11,7 +11,7 @@
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 import Tags from '@/components/Bill/Tags.vue';
-import Notes from '@/components/Bill/Notes.vue';
+import InputItem from '@/components/Bill/InputItem.vue';
 import Types from '@/components/Bill/Types.vue';
 import NumberPad from '@/components/Bill/NumberPad.vue';
 import billModel from '@/models/billModel';
@@ -20,7 +20,7 @@ import tagsModel from '@/models/tagsModel';
 
 
 @Component({
-  components: {Tags, Notes, Types, NumberPad}
+  components: {Tags, InputItem, Types, NumberPad}
 })
 export default class Bill extends Vue {
   tags = tagsModel.get();

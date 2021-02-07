@@ -1,10 +1,16 @@
 <template>
   <base-layout>
-    <div>
+    <div class="topBar">
       <Icon name="#left"/>
-      <span>编辑标签</span>
+      <span class="title">编辑标签</span>
+      <span class="right"/>
     </div>
-    <Notes field-name="标签名" placeholder="请输入标签名"/>
+    <div class="input-wrapper">
+      <InputItem field-name="标签名" placeholder="请输入标签名"/>
+    </div>
+    <div class="btn-wrapper">
+      <Button>删除标签</Button>
+    </div>
   </base-layout>
 </template>
 
@@ -12,9 +18,10 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagsModel from '@/models/tagsModel';
-import Notes from '@/components/Bill/Notes.vue';
+import InputItem from '@/components/Bill/InputItem.vue';
+import Button from '@/components/Button.vue';
 @Component({
-  components: {Notes}
+  components: {Button, InputItem}
 })
 export default class EditLabel extends Vue {
   created() {
@@ -35,5 +42,31 @@ export default class EditLabel extends Vue {
 </script>
 
 <style lang="scss" scoped>
+  .topBar{
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    >.title{
 
+    }
+    > svg{
+
+    }
+    >.right{
+      width:24px;
+      height:18px;
+    }
+  }
+  .input-wrapper{
+    background: white;
+    margin-top: 8px;
+  }
+  .btn-wrapper{
+    text-align: center;
+    padding: 16px;
+  }
 </style>
