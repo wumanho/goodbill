@@ -1,18 +1,5 @@
 import createId from '@/lib/createId';
-
 const LOCAL_STORAGE_KEY_NAME = 'tags';
-type Tag = {
-    id: string;
-    name: string;
-}
-type TagsModel = {
-    data: Tag[];
-    get: () => Tag[];
-    create: (name: string) => string;
-    update: (id: string, name: string) => void;
-    remove: (id: string) => void;
-    save: () => void;
-}
 
 const tagsModel: TagsModel = {
     data: [],

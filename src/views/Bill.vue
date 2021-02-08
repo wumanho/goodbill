@@ -15,13 +15,12 @@ import InputItem from '@/components/Bill/InputItem.vue';
 import Types from '@/components/Bill/Types.vue';
 import NumberPad from '@/components/Bill/NumberPad.vue';
 import billModel from '@/models/billModel';
-import tagsModel from '@/models/tagsModel';
 
 @Component({
   components: {Tags, InputItem, Types, NumberPad}
 })
 export default class Bill extends Vue {
-  tags = tagsModel.get();
+  tags = window.tagList;
   records: RecordItem[] = billModel.get();
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 

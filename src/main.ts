@@ -3,14 +3,16 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
-import Nav from '@/components/Nav.vue';
 import BaseLayout from '@/components/BaseLayout.vue';
 import Icon from '@/components/Icon.vue';
+import tagsModel from '@/models/tagsModel';
+
 
 Vue.config.productionTip = false;
 
 Vue.component('BaseLayout', BaseLayout);
-Vue.component("Icon",Icon)
+Vue.component('Icon', Icon);
+window.tagList = tagsModel.get();
 
 new Vue({
     router: router,
