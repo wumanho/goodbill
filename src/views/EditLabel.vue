@@ -1,7 +1,9 @@
 <template>
   <base-layout>
     <div class="topBar">
-      <Icon name="#left" @click="goBack"/>
+      <router-link to="/labels/">
+        <Icon name="#left"/>
+      </router-link>
       <span class="title">编辑标签</span>
       <span class="right"/>
     </div>
