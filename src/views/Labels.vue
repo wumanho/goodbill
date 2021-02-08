@@ -15,7 +15,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagsModel from '@/models/tagsModel';
 import Button from '@/components/Button.vue';
 // tagsModel.get();
 @Component({
@@ -26,14 +25,10 @@ export default class Labels extends Vue {
 
   createTag() {
     const name = window.prompt('请输入标签名');
-    if (name) {
-      try{
-        tagsModel.create(name);
-      }catch (err){
-        alert(err)
-      }
-    } else {
-      alert('标签名不能为空');
+    if (name){
+      window.createTag(name);
+    }else{
+      alert("名字不能为空")
     }
   }
 }

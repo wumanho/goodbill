@@ -13,6 +13,13 @@ Vue.config.productionTip = false;
 Vue.component('BaseLayout', BaseLayout);
 Vue.component('Icon', Icon);
 window.tagList = tagsModel.get();
+window.createTag = (name: string) => {
+    try {
+        tagsModel.create(name);
+    } catch (err) {
+        alert(err);
+    }
+};
 
 new Vue({
     router: router,
