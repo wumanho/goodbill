@@ -17,8 +17,6 @@ import NumberPad from '@/components/Bill/NumberPad.vue';
 import billModel from '@/models/billModel';
 import tagsModel from '@/models/tagsModel';
 
-
-
 @Component({
   components: {Tags, InputItem, Types, NumberPad}
 })
