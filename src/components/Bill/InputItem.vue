@@ -1,13 +1,13 @@
 <template>
   <label class="notes">
     <span class="name">{{ fieldName }}</span>
-    <input type="text" :value="value" @input="onValueChange($event.target.value)" :placeholder="this.placeholder"/>
+    <input type="text" :value="value" @input="onValueChange($event.target.value)" :placeholder="placeholder"/>
   </label>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class InputItem extends Vue {
@@ -16,7 +16,6 @@ export default class InputItem extends Vue {
   @Prop({default:"",type:String}) readonly value!: string;
   //content = this.value;
 
-  @Watch('value')
   onValueChange(newValue: string) {
       this.$emit("update:value",newValue)
   }

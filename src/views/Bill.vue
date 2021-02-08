@@ -28,15 +28,14 @@ export default class Bill extends Vue {
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }
-  saveRecord(){
-    const newRecord: RecordItem = billModel.clone(this.record)
-    newRecord.createTime = new Date();
-    this.records.push(newRecord)
+
+  saveRecord() {
+    billModel.create(this.record);
   }
 
-  @Watch("records")
-  onRecordsChanged(){
-    billModel.save(this.records)
+  @Watch('records')
+  onRecordsChanged() {
+    billModel.save();
     location.reload();
   }
 

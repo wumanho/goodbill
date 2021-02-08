@@ -59,7 +59,12 @@ export default class EditLabel extends Vue {
   }
 
   remove(id: string) {
-    tagsModel.remove(id);
+    if(window.confirm("确认要删除该标签吗")){
+      tagsModel.remove(id);
+      this.$router.back();
+    }else{
+      return
+    }
   }
 }
 </script>
