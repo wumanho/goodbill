@@ -19,7 +19,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagsModel from '@/models/tagsModel';
 import InputItem from '@/components/Bill/InputItem.vue';
 import Button from '@/components/Button.vue';
 
@@ -27,43 +26,32 @@ import Button from '@/components/Button.vue';
   components: {Button, InputItem}
 })
 export default class EditLabel extends Vue {
-  tag?: { id: string; name: string } = undefined;
+  tag: Tag = undefined;
 
   created() {
-    //获取url中的参数
-    const id = this.$route.params.id;
-    tagsModel.get();
-    //获取所有tags
-    const tags = tagsModel.data;
-    //找到传入参数对应的tag
-    const tag = tags.filter(t => t.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-      console.log(tag);
-    } else {
-      this.$router.replace('/404');
-    }
+      //获取url中的参数
+      this.tag = window.findTag(this.$route.params.id);
+      if(!this.tag){
+        this.$router.replace('/404');
+      }
   }
 
   updateTagName(value: string) {
     if (this.tag) {
-      try {
-        tagsModel.update(this.tag.id, value);
-      } catch (error) {
-        alert(error);
-      }
+      window.updateTag(this.tag.id,value)
     }
   }
-  goBack(){
-    this.$router.back()
+
+  goBack() {
+    this.$router.back();
   }
 
   remove(id: string) {
-    if(window.confirm("确认要删除该标签吗")){
-      tagsModel.remove(id);
+    if (window.confirm('确认要删除该标签吗')) {
+      window.remove(id);
       this.$router.back();
-    }else{
-      return
+    } else {
+      return;
     }
   }
 }
