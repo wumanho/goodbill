@@ -18,10 +18,5 @@ type TagsModel = {
     save: () => void;
 }
 
-interface Window {
-    tagList: Tag[];
-    createTag: (name: string) => void;
-    remove: (id: string) => void;
-    updateTag: (id: string, name: string) => void;
-    findTag: (id: string) => Tag | undefined;
-}
+// interface Window {
+// }

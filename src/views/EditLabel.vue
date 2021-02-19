@@ -21,16 +21,17 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import InputItem from '@/components/Bill/InputItem.vue';
 import Button from '@/components/Button.vue';
+import store from '@/store/index2';
 
 @Component({
   components: {Button, InputItem}
 })
 export default class EditLabel extends Vue {
-  tag: Tag = undefined;
+  tag?: Tag = undefined;
 
   created() {
       //获取url中的参数
-      this.tag = window.findTag(this.$route.params.id);
+      this.tag = store.findTag(this.$route.params.id);
       if(!this.tag){
         this.$router.replace('/404');
       }
@@ -38,17 +39,17 @@ export default class EditLabel extends Vue {
 
   updateTagName(value: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id,value)
+      store.updateTag(this.tag.id,value)
     }
   }
 
-  goBack() {
-    this.$router.back();
-  }
+  // goBack() {
+  //   this.$router.back();
+  // }
 
   remove(id: string) {
     if (window.confirm('确认要删除该标签吗')) {
-      window.remove(id);
+      store.removeTag(id);
       this.$router.back();
     } else {
       return;
