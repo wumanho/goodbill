@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           @click="select(tag)" :class="{selected:selectedTags.indexOf(tag)>=0}">{{ tag.name }}
       </li>
     </ul>
@@ -13,12 +13,21 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
-import store from '@/store/index2';
-@Component
+import {Component} from 'vue-property-decorator';
+
+@Component({
+  computed: {
+    tagList() {
+      return this.$store.state.tagList;
+    }
+  }
+})
 export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource: string[] | undefined;
   selectedTags: string[] = [];
+
+  created() {
+    this.$store.commit('getTags');
+  }
 
   select(tag: string) {
     const index = this.selectedTags.indexOf(tag);
@@ -31,21 +40,15 @@ export default class Tags extends Vue {
   }
 
   create() {
-    // const name = window.prompt('请输入标签名');
-    // if (name) {
-    //   try{
-    //     tagsModel.create(name);
-    //   }catch (err){
-    //     alert(err)
-    //   }
-    // } else {
-    //   alert('标签名不能为空');
-    // }
     const name = window.prompt('请输入标签名');
-    if (name){
-      store.createTag(name);
-    }else{
-      alert("名字不能为空")
+    if (name) {
+      try {
+        this.$store.commit('createTag', name);
+      } catch (err) {
+        alert(err);
+      }
+    } else {
+      alert('名字不能为空');
     }
   }
 }
@@ -61,6 +64,7 @@ export default class Tags extends Vue {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
   > .current {
     display: flex;
     flex-wrap: wrap;

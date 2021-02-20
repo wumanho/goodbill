@@ -12,9 +12,6 @@ const recordStore = {
         localStorage.setItem(LOCAL_STORAGE_KEY_NAME, JSON.stringify(this.recordList));
         alert('记账成功');
     },
-    /**
-     * 记账读写
-     */
     createRecord(record: RecordItem){
         const newRecord: RecordItem = clone(record);
         newRecord.createTime = new Date();

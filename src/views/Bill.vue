@@ -1,6 +1,6 @@
 <template>
   <BaseLayout class-prefix="layout">
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags @update:value="onUpdateTags"/>
     <InputItem field-name="备注" placeholder="在这里输入备注" :value.sync="record.notes"/>
     <Types :type.sync="record.type"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
@@ -14,14 +14,23 @@ import Tags from '@/components/Bill/Tags.vue';
 import InputItem from '@/components/Bill/InputItem.vue';
 import Types from '@/components/Bill/Types.vue';
 import NumberPad from '@/components/Bill/NumberPad.vue';
-import store from '@/store/index2';
+import Button from '@/components/Button.vue';
 
 @Component({
-  components: {Tags, InputItem, Types, NumberPad}
+  components: {Button, Tags, InputItem, Types, NumberPad},
+  computed: {
+    recodeList() {
+      return this.$store.state.recordList;
+    }
+  }
 })
 export default class Bill extends Vue {
-  tags = store.tagList;
-  records: RecordItem[] = store.recordList;
+  //tags = oldStore.tagList;
+  //records: RecordItem[] = oldStore.recordList;
+  created() {
+    this.$store.commit('getRecords');
+  }
+
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
   onUpdateTags(value: string[]) {
@@ -29,14 +38,8 @@ export default class Bill extends Vue {
   }
 
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store.commit('createRecord', this.record);
   }
-
-  // @Watch('records')
-  // onRecordsChanged() {
-  //   billModel.save();
-  //   location.reload();
-  // }
 
 }
 </script>
