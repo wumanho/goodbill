@@ -1,7 +1,7 @@
 <template>
   <ul class="types">
-    <li :class="type === '-' && 'selected'" @click="switchType('-')">支出</li>
-    <li :class="type === '+' && 'selected'" @click="switchType('+')">收入</li>
+    <li :class="{selected:type === '-',[classPrefix + '-item']:classPrefix}" @click="switchType('-')">支出</li>
+    <li :class="{selected:type === '+',[classPrefix + '-item']:classPrefix}" @click="switchType('+')">收入</li>
   </ul>
 </template>
 
@@ -13,13 +13,14 @@ import {Component, Prop} from 'vue-property-decorator';
 export default class Types extends Vue {
   // type = '-'; // "-" 表示支出 "+"表示收入
   @Prop(String) readonly type!: string;
+  @Prop(String) classPrefix?: string;
 
   switchType(type: string) {
-    if (type !== "+" && type !== "-"){
-      throw new Error("type is wrong")
+    if (type !== '+' && type !== '-') {
+      throw new Error('type is wrong');
     }
     //this.type = type;
-    this.$emit("update:type",type)
+    this.$emit('update:type', type);
   }
 
   // @Watch('type')
