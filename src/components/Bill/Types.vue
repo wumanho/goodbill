@@ -12,7 +12,7 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Types extends Vue {
   // type = '-'; // "-" 表示支出 "+"表示收入
-  @Prop(String) readonly type!: string;
+  @Prop(String) type!: string;
   @Prop(String) classPrefix?: string;
 
   switchType(type: string) {
@@ -22,11 +22,6 @@ export default class Types extends Vue {
     //this.type = type;
     this.$emit('update:type', type);
   }
-
-  // @Watch('type')
-  // onTypeChanged(val: string) {
-  //   this.$emit("update:value",val)
-  // }
 }
 </script>
 

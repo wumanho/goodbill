@@ -2,7 +2,8 @@
   <BaseLayout class-prefix="layout">
     <Tags @update:value="onUpdateTags"/>
     <InputItem field-name="备注" placeholder="在这里输入备注" :value.sync="record.notes"/>
-    <Types :type.sync="record.type"/>
+    <!--    <Types :type.sync="record.type"/>-->
+    <Tabs :data-source="typeArray" :type.sync="record.type"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
   </BaseLayout>
 </template>
@@ -15,9 +16,10 @@ import InputItem from '@/components/Bill/InputItem.vue';
 import Types from '@/components/Bill/Types.vue';
 import NumberPad from '@/components/Bill/NumberPad.vue';
 import Button from '@/components/Button.vue';
+import Tabs from '@/components/Tabs.vue';
 
 @Component({
-  components: {Button, Tags, InputItem, Types, NumberPad},
+  components: {Tabs, Button, Tags, InputItem, Types, NumberPad},
   computed: {
     recodeList() {
       return this.$store.state.recordList;
@@ -32,6 +34,11 @@ export default class Bill extends Vue {
   }
 
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
+
+  typeArray = [
+    {key: '-', text: '支出'},
+    {key: '+', text: '收入'}
+  ];
 
   onUpdateTags(value: string[]) {
     this.record.tags = value;
